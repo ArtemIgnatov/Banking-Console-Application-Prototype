@@ -28,6 +28,7 @@ namespace HW_13
 
             accountBalance = 0.0;
             this.accountBalance = AccountBalance;
+
         }
 
         /// <summary>
@@ -38,6 +39,7 @@ namespace HW_13
 
         private string accountNum; // Поле номера счета
         private double accountBalance; // Поле с балансом счета
+        public double transferAmount; // Добавили сумму перевода
 
         /// <summary>
         /// Номер счета
@@ -56,8 +58,6 @@ namespace HW_13
             get { return this.accountBalance; }
             set { this.accountBalance = value; }
         }
-
-
 
         /// <summary>
         /// Метод для перевода средств на другой счет
@@ -82,6 +82,7 @@ namespace HW_13
                 accountTo.AccountBalance += value;
                 Console.WriteLine($"Перевод выполнен!");  
             }
+            transferAmount = value;
 
         }
 
@@ -95,7 +96,8 @@ namespace HW_13
             double value = Convert.ToDouble(Console.ReadLine());
             this.accountBalance += value;
             Console.WriteLine($"Счет {this.accountNum} успешо пополнен на сумму {value}");
-       
+            transferAmount = value;
+
         }
 
          /// <summary>

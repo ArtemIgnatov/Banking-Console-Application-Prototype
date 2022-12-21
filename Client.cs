@@ -62,11 +62,12 @@ namespace HW_13
 		private string changes; // Информация об изменениях
 		private NotDepositeAccount notDepAcc; // Не депозитный аккаунт
 		private DepositeAccount depAcc; // Депозитный аккаунт
+		public double clientTransferAmount; // Добавили сумму перевода
 
 
 		/// <summary>
-        /// Не депозитный счет
-        /// </summary>
+		/// Не депозитный счет
+		/// </summary>
 		public string NotDepAcc
 		{
 			get { return this.notDepAcc.AccountInformation(); }
@@ -145,16 +146,6 @@ namespace HW_13
 			set { this.changes = value; }
 		}
 
-		///// <summary>
-  //      /// Запись сообщения об измменениях
-  //      /// </summary>
-  //      /// <param name="message"></param>
-		//public delegate void AccountHandler(string message);
-
-		///// <summary>
-  //      /// Определения события
-  //      /// </summary>
-  //      public event AccountHandler? Notify;
 
 		/// <summary>
 		/// Информация о клиенте
@@ -210,9 +201,11 @@ namespace HW_13
 			{
 				case "1":
 					this.notDepAcc.MoneyTransfe(this.depAcc);
+					this.clientTransferAmount = this.notDepAcc.transferAmount; // Дописал
 					break;
 				case "2":
 					this.depAcc.CashRefill();
+					this.clientTransferAmount = this.depAcc.transferAmount; //Дописал
 					break;
 				default:
 					Console.WriteLine("Некорректный ввод, введите 1 или 2\n");
@@ -247,6 +240,7 @@ namespace HW_13
             else
             {
 				this.notDepAcc.MoneyTransfe(this.depAcc);
+				this.clientTransferAmount = this.notDepAcc.transferAmount; // Дописал
 			}
 
 		}
@@ -263,6 +257,7 @@ namespace HW_13
 			else
             {
 				this.depAcc.MoneyTransfe(this.notDepAcc);
+				this.clientTransferAmount = this.depAcc.transferAmount; // Дописал
 			}
 		}
 
@@ -280,6 +275,7 @@ namespace HW_13
 			{
 				case "1":
 					this.notDepAcc.CashRefill();
+					this.clientTransferAmount = this.notDepAcc.transferAmount; // Дописал
 					break;
 				case "2":
 					if (this.depAcc.AccountBalance == 0 || this.depAcc.Term == 0)
@@ -303,6 +299,7 @@ namespace HW_13
 					else
 					{
 						this.depAcc.CashRefill();
+						this.clientTransferAmount = this.depAcc.transferAmount; // Дописал
 					}
 					break;
 				case "3":
@@ -321,7 +318,7 @@ namespace HW_13
         {
 			Console.WriteLine("Перевод может быть осуществлен только между недепозитными счетами клиентов!");
 			this.notDepAcc.MoneyTransfe(reciver.notDepAcc);
-			
+			this.clientTransferAmount = this.notDepAcc.transferAmount; // Дописал
 		}
 	}
 }
